@@ -1,6 +1,7 @@
 {% load i18n %}
-<a href="{% if record.report_file %}{{ record.report_file.url }}{% endif %}"
+<a href="{% if record.is_complete %}{% url 'dashboard:reports-download' record.uuid %}{% endif %}"
    class="btn btn-info"
    {% if not record.is_complete %}disabled{% endif %}
 >
-{% trans "Download" %}</a>
+    {% trans "Download" %}
+</a>

@@ -2,11 +2,14 @@ from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import redirect
 from django.views.generic.edit import FormMixin
+from django.views.generic.detail import BaseDetailView
+from django.http import FileResponse
 from django_tables2 import SingleTableView
 from psycopg2.extras import DateTimeTZRange
 from .models import Report
 from .tables import ReportTable
 from .forms import ReportForm
+import os.path
 
 
 class IndexView(FormMixin, SingleTableView):
@@ -60,3 +63,25 @@ class IndexView(FormMixin, SingleTableView):
         context = super().get_context_data(**kwargs)
         context['form'] = self.form
         return context
+
+
+class DownloadView(BaseDetailView):
+    model = Report
+    slug_field = 'uuid'
+    slug_url_kwarg = 'uuid'
+
+    def render_to_response(self, context, **response_kwargs):
+        report = context['object']
+        # Build filename
+        extension = os.path.splitext(report.report_file.name)[1].replace('.', '')
+        filename = '{date}_{type_code}_{uuid}.{ext}'.format(
+            date=report.created_on.strftime('%Y-%m-%d'),
+            type_code=report.type_code,
+            uuid=report.uuid,
+            ext=extension)
+        # Send file to client
+        resp = FileResponse(report.report_file,
+             as_attachment=True,
+             filename=filename)
+        resp['Content-Type'] = report.mime_type
+        return resp

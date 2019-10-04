@@ -11,10 +11,14 @@ class ReportsDashboardConfig(apps.ReportsDashboardConfig):
         super().ready()
         from . import handlers  # NOQA
         self.index_view = get_class('reports_dashboard.views', 'IndexView')
+        self.download_view = get_class('reports_dashboard.views', 'DownloadView')
 
 
     def get_urls(self):
         urls = [
-            url(r'^$', self.index_view.as_view(), name='reports-index'),
+            url(r'^$',
+                self.index_view.as_view(), name='reports-index'),
+            url(r'^(?P<uuid>[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})/download/$',
+                self.download_view.as_view(), name='reports-download'),
         ]
         return self.post_process_urls(urls)
