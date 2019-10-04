@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from oscar.forms.widgets import DatePickerInput
+from oscar.forms.widgets import DateTimePickerInput
 from .utils import GeneratorRepository
 
 
@@ -16,16 +16,16 @@ class ReportForm(forms.Form):
         label=_("Report Type"),
         help_text=_("Only the offer and order reports use the selected date range"))
 
-    date_from = forms.DateField(
+    date_from = forms.DateTimeField(
         label=_("Date from"),
         required=False,
-        widget=DatePickerInput)
+        widget=DateTimePickerInput)
 
-    date_to = forms.DateField(
+    date_to = forms.DateTimeField(
         label=_("Date to"),
         help_text=_("The report is inclusive of this date"),
         required=False,
-        widget=DatePickerInput)
+        widget=DateTimePickerInput)
 
     def clean(self):
         date_from = self.cleaned_data.get('date_from', None)
