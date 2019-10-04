@@ -4,6 +4,9 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import DateTimeRangeField
+from django.core.mail import EmailMultiAlternatives
+from django.contrib.sites.models import Site
+from django.template.loader import get_template
 from oscar.models.fields import NullCharField
 from . import settings as app_settings
 from .utils import GeneratorRepository
@@ -109,26 +112,26 @@ class Report(models.Model):
 
     def queue(self, delay=10, report_format='CSV'):
         # Reset metadata
+        generator = self.get_generator(report_format)
+        self.description = generator.report_description()
         self.queued_on = None
         self.started_on = None
         self.completed_on = None
         self.task_id = None
         self.save(update_fields=[
+            'description',
             'queued_on',
             'started_on',
             'completed_on',
             'task_id',
         ])
         # Queue the task using celery
-        generator = self.get_generator(report_format)
         from . import tasks
         task = tasks.generate_report.apply_async(args=[self.uuid, report_format], countdown=delay)
         # Update the task metadata
-        self.description = generator.report_description()
         self.queued_on = timezone.now()
         self.task_id = task.id
         self.save(update_fields=[
-            'description',
             'queued_on',
             'task_id',
         ])
@@ -154,7 +157,26 @@ class Report(models.Model):
             'report_file',
             'completed_on',
         ])
+        self.send_completed_alert()
     generate.alters_data = True
+
+
+    def send_completed_alert(self):
+        if not self.owner.email:
+            return
+        ctx = {
+            'site': Site.objects.get_current(),
+            'report': self,
+        }
+        subject = get_template('oscar/dashboard/reports/emails/report_completed_alert_subject.txt').render(ctx)
+        subject = subject.replace('\n', '')
+        text = get_template('oscar/dashboard/reports/emails/report_completed_alert_body.txt').render(ctx)
+        html = get_template('oscar/dashboard/reports/emails/report_completed_alert_body.html').render(ctx)
+        to_addrs = [self.owner.email]
+        msg = EmailMultiAlternatives(subject, text, settings.OSCAR_FROM_EMAIL, to_addrs)
+        msg.attach_alternative(html, "text/html")
+        msg.send()
+    send_completed_alert.alters_data = True
 
 
     def get_generator(self, report_format):

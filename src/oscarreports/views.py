@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.shortcuts import redirect
 from django.views.generic.edit import FormMixin, DeleteView
 from django.views.generic.detail import BaseDetailView
-from django.http import FileResponse
+from django.http import FileResponse, Http404
 from django_tables2 import SingleTableView
 from psycopg2.extras import DateTimeTZRange
 from .models import Report
@@ -77,6 +77,8 @@ class ReportDownloadView(BaseDetailView):
 
     def render_to_response(self, context, **response_kwargs):
         report = context['object']
+        if not report.report_file.name:
+            raise Http404()
         # Build filename
         extension = os.path.splitext(report.report_file.name)[1].replace('.', '')
         filename = '{date}_{type_code}_{uuid}.{ext}'.format(

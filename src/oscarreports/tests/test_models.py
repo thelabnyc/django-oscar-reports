@@ -1,4 +1,5 @@
 from datetime import timedelta
+from django.core import mail
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -14,6 +15,7 @@ class ReportTest(TestCase):
     def setUp(self):
         self.staff_user = User.objects.create_user(
             username='root',
+            email='root@example.com',
             is_staff=True)
 
         self.report = models.Report()
@@ -120,6 +122,7 @@ class ReportTest(TestCase):
         self.assertIsNone(self.report.task_id)
         self.assertIsNone(self.report.mime_type)
         self.assertIsNone(self.report.report_file.name)
+        self.assertEqual(len(mail.outbox), 0)
 
         task = self.report.queue(delay=0)
         self.assertIsNone(task.get())
@@ -134,6 +137,9 @@ class ReportTest(TestCase):
         self.assertEqual(self.report.mime_type, 'text/csv')
         self.assertTrue(self.report.report_file.name.startswith('oscar-reports/2019/10/03/d3c74a8b-e7ae-4482-bd9c-bee69fde5c5c'))
         self.assertTrue(self.report.report_file.name.endswith('.csv'))
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'Your report is ready to download | Orders placed between Oct. 2, 2019 and Oct. 3, 2019')
 
 
     def test_delete(self):
