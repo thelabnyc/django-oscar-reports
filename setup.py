@@ -20,6 +20,7 @@ extras_require = {
     'development': [
         'coverage>=4.4.2',
         'flake8>=3.5.0',
+        'freezegun>=0.3.12',
         'psycopg2cffi>=2.7.7',
         'PyYAML>=3.12',
         'sorl-thumbnail>=11.04',
