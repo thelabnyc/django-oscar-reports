@@ -167,4 +167,4 @@ class Report(models.Model):
 
 
     def get_filename(self, report_format):
-        return f'{self.uuid}.{report_format.lower()}'
+        return '{}.{}'.format(self.uuid, report_format.lower())
