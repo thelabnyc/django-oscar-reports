@@ -1,7 +1,8 @@
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import redirect
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormMixin, DeleteView
 from django.views.generic.detail import BaseDetailView
 from django.http import FileResponse
 from django_tables2 import SingleTableView
@@ -30,8 +31,12 @@ class IndexView(FormMixin, SingleTableView):
 
 
     def get_queryset(self):
-        queryset = self.model.objects.all().order_by('-created_on')
+        queryset = self.model.objects.all().order_by('-queued_on')
         return queryset
+
+
+    def get_table_pagination(self, table):
+        return dict(per_page=20)
 
 
     def post(self, request, *args, **kwargs):
@@ -65,7 +70,7 @@ class IndexView(FormMixin, SingleTableView):
         return context
 
 
-class DownloadView(BaseDetailView):
+class ReportDownloadView(BaseDetailView):
     model = Report
     slug_field = 'uuid'
     slug_url_kwarg = 'uuid'
@@ -85,3 +90,11 @@ class DownloadView(BaseDetailView):
              filename=filename)
         resp['Content-Type'] = report.mime_type
         return resp
+
+
+class ReportDeleteView(DeleteView):
+    model = Report
+    slug_field = 'uuid'
+    slug_url_kwarg = 'uuid'
+    success_url = reverse_lazy('dashboard:reports-index')
+    template_name = 'oscar/dashboard/reports/report_confirm_delete.html'

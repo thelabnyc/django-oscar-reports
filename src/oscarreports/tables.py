@@ -14,8 +14,11 @@ class ReportTable(DashboardTable):
 
     owner = Column(accessor='owner.get_full_name', orderable=False, verbose_name=_('Owner'))
     status = Column(accessor='status_name', orderable=False, verbose_name=_('Status'))
+    filesize = TemplateColumn(
+        template_name='oscar/dashboard/reports/report_row_filesize.html',
+        verbose_name=_("File Size"),
+        orderable=False)
 
-    created_on = Column(accessor='created_on')
     queued_on = Column(accessor='queued_on')
     started_on = Column(accessor='started_on')
     completed_on = Column(accessor='completed_on')
