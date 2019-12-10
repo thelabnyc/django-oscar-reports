@@ -13,7 +13,8 @@ class ReportTable(DashboardTable):
         orderable=False)
 
     owner = Column(accessor='owner.get_full_name', orderable=False, verbose_name=_('Owner'))
-    status = Column(accessor='status_name', orderable=False, verbose_name=_('Status'))
+    status = Column(accessor='status_name', orderable=False, verbose_name=_('Report Status'))
+    task_status = Column(accessor='celery_task_status', orderable=False, verbose_name=_('Task Status'))
     filesize = TemplateColumn(
         template_name='oscar/dashboard/reports/report_row_filesize.html',
         verbose_name=_("File Size"),

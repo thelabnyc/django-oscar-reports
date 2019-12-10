@@ -7,6 +7,7 @@ from django.contrib.postgres.fields import DateTimeRangeField
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.sites.models import Site
 from django.template.loader import get_template
+from celery.result import AsyncResult
 from oscar.models.fields import NullCharField
 from . import settings as app_settings
 from .utils import GeneratorRepository
@@ -108,6 +109,25 @@ class Report(models.Model):
         if not generator:
             raise ValueError("Can not queue report: no generator class was found.")
         return generator
+
+
+    @property
+    def celery_task_result(self):
+        if not self.task_id:
+            return
+        task_id = str(self.task_id).encode()
+        return AsyncResult(task_id)
+
+
+    @property
+    def celery_task_status(self):
+        result_future = self.celery_task_result
+        if result_future is None:
+            return None
+        status = result_future.status
+        if status is None or status == 'PENDING':
+            return None
+        return str(status).title()
 
 
     def queue(self, delay=10, report_format='CSV'):
