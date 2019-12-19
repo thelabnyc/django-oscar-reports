@@ -27,6 +27,13 @@ class ReportForm(forms.Form):
         required=False,
         widget=DateTimePickerInput)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # get any newly registered generators
+        type_choices = [((generator.code, generator.description)) for generator in self.generators]
+        self.fields['report_type'].choices = type_choices
+
+
     def clean(self):
         date_from = self.cleaned_data.get('date_from', None)
         date_to = self.cleaned_data.get('date_to', None)
