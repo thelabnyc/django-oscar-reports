@@ -13,7 +13,8 @@ packages = find_packages('src')
 
 install_requires = [
     'celery>=4.3',
-    'django-oscar>=2.0.0',
+    'django>=2.2',
+    'django-oscar>=2.1',
 ]
 
 extras_require = {
@@ -28,7 +29,7 @@ extras_require = {
         'versiontag>=1.2.0',
 
         # Needed for Oscar's web test framework
-        'django-webtest==1.9.4',
+        'django-webtest>=1.9,<1.10',
         'WebTest>=2.0,<2.1',
     ],
 }
@@ -53,15 +54,11 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 2.2',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: ISC License (ISCL)',
         'Operating System :: Unix',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
     ],
     author='Craig Weber',
     author_email='crgwbr@gmail.com',
