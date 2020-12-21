@@ -26,6 +26,7 @@ extras_require = {
         'PyYAML>=3.12',
         'sorl-thumbnail>=11.04',
         'tox>=2.9.1',
+        'unittest-xml-reporting>=3.0.4',
         'versiontag>=1.2.0',
 
         # Needed for Oscar's web test framework
