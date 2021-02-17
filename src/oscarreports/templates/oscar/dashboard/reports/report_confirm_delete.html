@@ -7,15 +7,19 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    <ul class="breadcrumb">
-        <li>
-            <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
-        </li>
-        <li>
-            <a href="{% url 'dashboard:reports-index' %}">{% trans "Reporting Dashboard" %}</a>
-        </li>
-        <li class="active">{% trans "Delete report?" %}</li>
-    </ul>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{% url 'dashboard:reports-index' %}">{% trans "Reporting Dashboard" %}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {% trans "Delete report?" %}
+            </li>
+        </ol>
+    </nav>
 {% endblock %}
 
 {% block headertext %}
@@ -26,7 +30,7 @@
     <div class="table-header">
         <h2>{% trans "Delete report" %}</h2>
     </div>
-    <form method="post" class="well">
+    <form method="post" class="card card-body">
         {% csrf_token %}
         {{ form }}
         <dl>

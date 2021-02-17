@@ -1,24 +1,13 @@
 {% load i18n %}
 <div class="btn-toolbar">
-    <div class="btn-group">
-        <a {% if record.is_complete %}
-           href="{% url 'dashboard:reports-download' record.uuid %}"
-           {% else %}
-           disabled
-           {% endif %}
-           class="btn btn-info"
-        >
-            {% trans "Download" %}
-        </a>
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            <span class="caret"></span>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% trans "Actions" %}
         </button>
-        <ul class="nav dropdown-menu pull-right">
-            <li>
-                <a href="{% url 'dashboard:reports-delete' record.uuid %}">
-                    {% trans "Delete" %}
-                </a>
-            </li>
-        </ul>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{% url 'dashboard:reports-delete' record.uuid %}">
+                {% trans "Delete" %}
+            </a>
+        </div>
     </div>
 </div>

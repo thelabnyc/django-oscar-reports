@@ -14,7 +14,7 @@ packages = find_packages('src')
 install_requires = [
     'celery>=4.3',
     'django>=2.2',
-    'django-oscar>=2.1',
+    'django-oscar>=3.0',
 ]
 
 extras_require = {
