@@ -12,7 +12,7 @@
         <form method="post" class="form-inline">
             {% csrf_token %}
             {% include "oscar/dashboard/partials/form_fields_inline.html" with form=form %}
-            <span class="form-group">
+            <span class="form-group mr-2">
                 <button type="submit" class="btn btn-primary" data-loading-text="{% trans 'Generating...' %}">
                     {% trans "Generate report" %}
                 </button>
