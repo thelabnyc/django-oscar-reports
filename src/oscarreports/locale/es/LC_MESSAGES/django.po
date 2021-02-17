@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-26 20:44+0000\n"
+"POT-Creation-Date: 2021-02-17 16:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr ""
 #: oscarreports/models.py:42
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.html:14
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.txt:4
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:33
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:37
 msgid "UUID"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgstr ""
 #: oscarreports/models.py:56 oscarreports/tables.py:15
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.html:20
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.txt:6
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:39
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:43
 msgid "Owner"
 msgstr ""
 
@@ -83,14 +83,14 @@ msgstr ""
 #: oscarreports/models.py:61
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.html:17
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.txt:5
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:36
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:40
 msgid "Description"
 msgstr ""
 
 #: oscarreports/models.py:62 oscarreports/tables.py:12
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.html:23
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.txt:7
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:42
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:46
 msgid "Date Range"
 msgstr ""
 
@@ -198,42 +198,42 @@ msgstr ""
 msgid "Delete Report"
 msgstr ""
 
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:12
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:13
 msgid "Dashboard"
 msgstr ""
 
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:15
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:16
 msgid "Reporting Dashboard"
 msgstr ""
 
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:17
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:22
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:19
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:26
 msgid "Delete report?"
 msgstr ""
 
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:27
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:31
 msgid "Delete report"
 msgstr ""
 
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:46
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:50
 msgid "Deleting..."
 msgstr ""
 
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:46
-#: oscarreports/templates/oscar/dashboard/reports/report_row_actions.html:19
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:50
+#: oscarreports/templates/oscar/dashboard/reports/report_row_actions.html:9
 msgid "Delete"
 msgstr ""
 
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:47
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:51
 msgid "or"
 msgstr ""
 
-#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:47
+#: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:51
 msgid "cancel"
 msgstr ""
 
-#: oscarreports/templates/oscar/dashboard/reports/report_row_actions.html:11
-msgid "Download"
+#: oscarreports/templates/oscar/dashboard/reports/report_row_actions.html:5
+msgid "Actions"
 msgstr ""
 
 #: oscarreports/views.py:56
