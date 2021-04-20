@@ -5,9 +5,23 @@
             {% trans "Actions" %}
         </button>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="{% url 'dashboard:reports-delete' record.uuid %}">
+            <a
+                class="dropdown-item"
+                {% if record.is_complete %}
+                    href="{% url 'dashboard:reports-download' record.uuid %}"
+                {% else %}
+                    disabled
+                {% endif %}
+            >
+                {% trans "Download" %}
+            </a>
+            <a
+                class="dropdown-item"
+                href="{% url 'dashboard:reports-delete' record.uuid %}"
+            >
                 {% trans "Delete" %}
             </a>
         </div>
     </div>
 </div>
+
