@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-17 16:05+0000\n"
+"POT-Creation-Date: 2021-04-20 22:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -220,7 +220,7 @@ msgid "Deleting..."
 msgstr ""
 
 #: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:50
-#: oscarreports/templates/oscar/dashboard/reports/report_row_actions.html:9
+#: oscarreports/templates/oscar/dashboard/reports/report_row_actions.html:22
 msgid "Delete"
 msgstr ""
 
@@ -234,6 +234,10 @@ msgstr ""
 
 #: oscarreports/templates/oscar/dashboard/reports/report_row_actions.html:5
 msgid "Actions"
+msgstr ""
+
+#: oscarreports/templates/oscar/dashboard/reports/report_row_actions.html:16
+msgid "Download"
 msgstr ""
 
 #: oscarreports/views.py:56
