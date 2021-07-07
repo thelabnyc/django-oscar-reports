@@ -2,32 +2,41 @@ from django.utils.translation import gettext_lazy as _
 from django_tables2 import Column, TemplateColumn
 from oscar.core.loading import get_class
 
-DashboardTable = get_class('dashboard.tables', 'DashboardTable')
+DashboardTable = get_class("dashboard.tables", "DashboardTable")
 
 
 class ReportTable(DashboardTable):
-    description = Column(accessor='description', orderable=False)
+    description = Column(accessor="description", orderable=False)
     date_range = TemplateColumn(
-        template_name='oscar/dashboard/reports/report_row_date_range.html',
+        template_name="oscar/dashboard/reports/report_row_date_range.html",
         verbose_name=_("Date Range"),
-        orderable=False)
+        orderable=False,
+    )
 
-    owner = Column(accessor='owner.get_full_name', orderable=False, verbose_name=_('Owner'))
-    status = Column(accessor='status_name', orderable=False, verbose_name=_('Report Status'))
-    task_status = Column(accessor='celery_task_status', orderable=False, verbose_name=_('Task Status'))
+    owner = Column(
+        accessor="owner.get_full_name", orderable=False, verbose_name=_("Owner")
+    )
+    status = Column(
+        accessor="status_name", orderable=False, verbose_name=_("Report Status")
+    )
+    task_status = Column(
+        accessor="celery_task_status", orderable=False, verbose_name=_("Task Status")
+    )
     filesize = TemplateColumn(
-        template_name='oscar/dashboard/reports/report_row_filesize.html',
+        template_name="oscar/dashboard/reports/report_row_filesize.html",
         verbose_name=_("File Size"),
-        orderable=False)
+        orderable=False,
+    )
 
-    queued_on = Column(accessor='queued_on')
-    started_on = Column(accessor='started_on')
-    completed_on = Column(accessor='completed_on')
+    queued_on = Column(accessor="queued_on")
+    started_on = Column(accessor="started_on")
+    completed_on = Column(accessor="completed_on")
 
     actions = TemplateColumn(
-        template_name='oscar/dashboard/reports/report_row_actions.html',
-        verbose_name=' ',
-        orderable=False)
+        template_name="oscar/dashboard/reports/report_row_actions.html",
+        verbose_name=" ",
+        orderable=False,
+    )
 
     class Meta(DashboardTable.Meta):
         pass
