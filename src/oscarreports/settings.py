@@ -6,4 +6,6 @@ def overridable(name, default=None):
 
 
 # Directory prefix used when uploading generated reports to storage
-OSCAR_REPORTS_UPLOAD_PREFIX = overridable('OSCAR_REPORTS_UPLOAD_PREFIX', 'oscar-reports')
+OSCAR_REPORTS_UPLOAD_PREFIX = overridable(
+    "OSCAR_REPORTS_UPLOAD_PREFIX", "oscar-reports"
+)
