@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-20 22:05+0000\n"
+"POT-Creation-Date: 2021-07-07 15:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Only the offer and order reports use the selected date range"
 msgstr ""
 
-#: oscarreports/forms.py:20
+#: oscarreports/forms.py:21
 msgid "Date from"
 msgstr ""
 
@@ -38,103 +38,103 @@ msgstr ""
 msgid "The report is inclusive of this date"
 msgstr ""
 
-#: oscarreports/forms.py:41
+#: oscarreports/forms.py:47
 msgid "Your start date must be before your end date"
 msgstr ""
 
-#: oscarreports/models.py:35
+#: oscarreports/models.py:36
 msgid "Created"
 msgstr ""
 
-#: oscarreports/models.py:36
+#: oscarreports/models.py:37
 msgid "Queued"
 msgstr ""
 
-#: oscarreports/models.py:37
+#: oscarreports/models.py:38
 msgid "In-Progress"
 msgstr ""
 
-#: oscarreports/models.py:38
+#: oscarreports/models.py:39
 msgid "Completed"
 msgstr ""
 
-#: oscarreports/models.py:42
+#: oscarreports/models.py:43
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.html:14
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.txt:4
 #: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:37
 msgid "UUID"
 msgstr ""
 
-#: oscarreports/models.py:48
+#: oscarreports/models.py:50
 msgid "Content Type"
 msgstr ""
 
-#: oscarreports/models.py:56 oscarreports/tables.py:15
+#: oscarreports/models.py:60 oscarreports/tables.py:17
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.html:20
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.txt:6
 #: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:43
 msgid "Owner"
 msgstr ""
 
-#: oscarreports/models.py:60
+#: oscarreports/models.py:65
 msgid "Type Code"
 msgstr ""
 
-#: oscarreports/models.py:61
+#: oscarreports/models.py:66
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.html:17
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.txt:5
 #: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:40
 msgid "Description"
 msgstr ""
 
-#: oscarreports/models.py:62 oscarreports/tables.py:12
+#: oscarreports/models.py:67 oscarreports/tables.py:12
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.html:23
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.txt:7
 #: oscarreports/templates/oscar/dashboard/reports/report_confirm_delete.html:46
 msgid "Date Range"
 msgstr ""
 
-#: oscarreports/models.py:65
+#: oscarreports/models.py:71
 msgid "Background Task ID"
 msgstr ""
 
-#: oscarreports/models.py:68
+#: oscarreports/models.py:75
 msgid "Created On"
 msgstr ""
 
-#: oscarreports/models.py:69
+#: oscarreports/models.py:76
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.html:26
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.txt:8
 msgid "Queued On"
 msgstr ""
 
-#: oscarreports/models.py:70
+#: oscarreports/models.py:77
 msgid "Started On"
 msgstr ""
 
-#: oscarreports/models.py:71
+#: oscarreports/models.py:78
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.html:29
 #: oscarreports/templates/oscar/dashboard/reports/emails/report_completed_alert_body.txt:9
 msgid "Completed On"
 msgstr ""
 
-#: oscarreports/models.py:74
+#: oscarreports/models.py:81
 msgid "MIME Type"
 msgstr ""
 
-#: oscarreports/models.py:75
+#: oscarreports/models.py:83
 msgid "Report File"
 msgstr ""
 
-#: oscarreports/tables.py:16
+#: oscarreports/tables.py:20
 msgid "Report Status"
 msgstr ""
 
-#: oscarreports/tables.py:17
+#: oscarreports/tables.py:23
 msgid "Task Status"
 msgstr ""
 
-#: oscarreports/tables.py:20
+#: oscarreports/tables.py:27
 msgid "File Size"
 msgstr ""
 
@@ -240,10 +240,10 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-#: oscarreports/views.py:56
+#: oscarreports/views.py:54
 msgid "Successfully queued report for generation"
 msgstr ""
 
-#: oscarreports/views.py:63
+#: oscarreports/views.py:60
 msgid "Reports"
 msgstr ""
