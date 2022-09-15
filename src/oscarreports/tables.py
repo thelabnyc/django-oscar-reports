@@ -14,7 +14,7 @@ class ReportTable(DashboardTable):
     )
 
     owner = Column(
-        accessor="owner.get_full_name", orderable=False, verbose_name=_("Owner")
+        accessor="owner__get_full_name", orderable=False, verbose_name=_("Owner")
     )
     status = Column(
         accessor="status_name", orderable=False, verbose_name=_("Report Status")
