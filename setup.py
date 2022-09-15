@@ -13,7 +13,7 @@ packages = find_packages("src")
 
 install_requires = [
     "celery>=4.3",
-    "django>=2.2",
+    "Django>=3.2",
     "django-oscar>=3.0",
 ]
 
@@ -22,7 +22,7 @@ extras_require = {
         "coverage>=4.4.2",
         "flake8>=3.5.0",
         "freezegun>=0.3.12",
-        "psycopg2cffi>=2.7.7",
+        "psycopg2-binary>=2.8.4",
         "PyYAML>=3.12",
         "sorl-thumbnail>=11.04",
         "tox>=2.9.1",
