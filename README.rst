@@ -20,6 +20,11 @@ An extension on-top of django-oscar that improves the Oscar Dashboard's report g
 Changelog
 =========
 
+2.2.0
+------------------
+- Add support for django-oscar 3.2.2
+- Add support for django 4.2
+
 2.1.0
 ------------------
 - Oscar 3.1 Compatibility
