@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "django-oscar-reports"
-version = "2.2.0.post2"
+version = "2.2.1"
 description = "An extension on-top of django-oscar that improves the Oscar Dashboard's report generation system"
 authors = [ "thelabnyc <thelabdev@thelabnyc.com>",]
 readme = "README.rst"
