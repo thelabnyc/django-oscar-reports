@@ -1,3 +1,4 @@
+from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
@@ -6,11 +7,18 @@ from django.views.generic.edit import FormMixin, DeleteView
 from django.views.generic.detail import BaseDetailView
 from django.http import FileResponse, Http404
 from django_tables2 import SingleTableView
-from psycopg2.extras import DateTimeTZRange
 from .models import Report
 from .tables import ReportTable
 from .forms import ReportForm
 import os.path
+
+try:
+    try:
+        from psycopg.types.range import Range as DateTimeTZRange
+    except ImportError:
+        from psycopg2.extras import DateTimeTZRange
+except ImportError:
+    raise ImproperlyConfigured("Error loading psycopg2 or psycopg module")
 
 
 class IndexView(FormMixin, SingleTableView):

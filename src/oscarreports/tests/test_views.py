@@ -1,11 +1,19 @@
 from datetime import timedelta
+from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils import timezone
-from psycopg2.extras import DateTimeTZRange
 from oscar.test.testcases import WebTestCase
 from webtest.app import AppError
 from .. import models
+
+try:
+    try:
+        from psycopg.types.range import Range as DateTimeTZRange
+    except ImportError:
+        from psycopg2.extras import DateTimeTZRange
+except ImportError:
+    raise ImproperlyConfigured("Error loading psycopg2 or psycopg module")
 
 
 class ReportsDashboardTests(WebTestCase):

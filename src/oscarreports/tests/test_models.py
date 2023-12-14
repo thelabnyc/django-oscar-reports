@@ -1,12 +1,20 @@
 from datetime import timedelta
+from django.core.exceptions import ImproperlyConfigured
 from django.core import mail
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.utils import timezone
 from freezegun import freeze_time
-from psycopg2.extras import DateTimeTZRange
 from unittest import mock
 from .. import models
+
+try:
+    try:
+        from psycopg.types.range import Range as DateTimeTZRange
+    except ImportError:
+        from psycopg2.extras import DateTimeTZRange
+except ImportError:
+    raise ImproperlyConfigured("Error loading psycopg2 or psycopg module")
 
 
 @freeze_time("2019-10-03T12:00:00-04:00")
