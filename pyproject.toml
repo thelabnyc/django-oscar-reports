@@ -23,7 +23,7 @@ Django = ">=3.2"
 django-oscar = ">=3.2.2"
 
 [tool.poetry.group.dev.dependencies]
-coverage = ">=4.4.2"
+coverage = ">=4.5.4"
 flake8 = ">=3.5.0"
 freezegun = ">=0.3.12"
 psycopg2-binary = ">=2.8.4"
