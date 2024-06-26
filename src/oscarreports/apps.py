@@ -1,4 +1,4 @@
-from django.urls import re_path
+from django.urls import path
 from oscar.apps.dashboard.reports import apps
 from oscar.core.loading import get_class
 
@@ -16,14 +16,14 @@ class ReportsDashboardConfig(apps.ReportsDashboardConfig):
 
     def get_urls(self):
         urls = [
-            re_path(r"^$", self.index_view.as_view(), name="reports-index"),
-            re_path(
-                r"^(?P<uuid>[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})/download/$",
+            path("", self.index_view.as_view(), name="reports-index"),
+            path(
+                "<uuid:uuid>/download/",
                 self.download_view.as_view(),
                 name="reports-download",
             ),
-            re_path(
-                r"^(?P<uuid>[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})/delete/$",
+            path(
+                "<uuid:uuid>/delete/",
                 self.delete_view.as_view(),
                 name="reports-delete",
             ),
