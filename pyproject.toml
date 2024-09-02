@@ -31,7 +31,7 @@ PyYAML = "^6.0.2"
 sorl-thumbnail = "^12.10.0"
 tox = "^4.18.0"
 unittest-xml-reporting = "^3.2.0"
-django-webtest = "^1.9.11"
+django-webtest = "^1.9.12"
 WebTest = "^3.0.0"
 
 [tool.commitizen]
