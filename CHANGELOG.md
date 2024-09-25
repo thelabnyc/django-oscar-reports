@@ -1,5 +1,12 @@
 # Changes
 
+## v2.2.3 (2024-09-25)
+
+### Fix
+
+- **deps**: update dependency django-oscar to v3.2.5
+- pin django-oscar version due to breaking changes in patch versions
+
 ## v2.2.2 (2024-08-31)
 
 ## v2.2.2b0 (2024-08-08)
