@@ -1367,4 +1367,4 @@ tests = ["PasteDeploy", "WSGIProxy2", "coverage", "pyquery", "pytest", "pytest-c
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "81c275c6cb2d95e4af8deab781d51141d2326cf6d0481ebbe0490c577c46918d"
+content-hash = "e65f98e9b4c8a76c59e0c291501766ebce1986149b3d816bdad5b5004b5bce24"
