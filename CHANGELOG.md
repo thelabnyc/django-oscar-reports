@@ -1,5 +1,11 @@
 # Changes
 
+## v2.3.0 (2025-02-06)
+
+### Feat
+
+- add type annotations
+
 ## v2.2.3 (2024-09-25)
 
 ### Fix
