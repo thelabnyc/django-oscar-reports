@@ -1,6 +1,12 @@
+from __future__ import annotations
+
+from datetime import datetime
+from typing import Any
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from oscar.forms.widgets import DateTimePickerInput
+
 from .utils import GeneratorRepository
 
 
@@ -18,7 +24,9 @@ class ReportForm(forms.Form):
     )
 
     date_from = forms.DateTimeField(
-        label=_("Date from"), required=False, widget=DateTimePickerInput
+        label=_("Date from"),
+        required=False,
+        widget=DateTimePickerInput,
     )
 
     date_to = forms.DateTimeField(
@@ -28,15 +36,15 @@ class ReportForm(forms.Form):
         widget=DateTimePickerInput,
     )
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         # get any newly registered generators
         type_choices = [
             ((generator.code, generator.description)) for generator in self.generators
         ]
-        self.fields["report_type"].choices = type_choices
+        self.fields["report_type"].choices = type_choices  # type:ignore[attr-defined]
 
-    def clean(self):
+    def clean(self) -> dict[str, str | datetime | None]:
         date_from = self.cleaned_data.get("date_from", None)
         date_to = self.cleaned_data.get("date_to", None)
         if (

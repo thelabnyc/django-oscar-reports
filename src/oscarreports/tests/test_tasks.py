@@ -1,9 +1,11 @@
 from datetime import timedelta
+
+from django.contrib.auth.models import User
 from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase
-from django.contrib.auth.models import User
 from django.utils import timezone
 from freezegun import freeze_time
+
 from .. import models, tasks
 
 try:

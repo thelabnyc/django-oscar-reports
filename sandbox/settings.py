@@ -1,6 +1,10 @@
+import os
+
 from django.utils.translation import gettext_lazy as _
 from oscar.defaults import *  # noqa
-import os
+import django_stubs_ext
+
+django_stubs_ext.monkeypatch()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -200,7 +204,7 @@ OSCAR_LINE_STATUS_PIPELINE = {
 }
 
 # Oscar
-OSCAR_SHOP_NAME = _("Sandbox")
+OSCAR_SHOP_NAME = _("Sandbox")  # type:ignore[assignment]
 OSCAR_ALLOW_ANON_CHECKOUT = True
 OSCAR_DEFAULT_CURRENCY = "USD"
 OSCARAPI_BLOCK_ADMIN_API_ACCESS = False

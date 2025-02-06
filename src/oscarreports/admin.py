@@ -1,9 +1,10 @@
 from django.contrib import admin
+
 from . import models
 
 
 @admin.register(models.Report)
-class ReportAdmin(admin.ModelAdmin):
+class ReportAdmin(admin.ModelAdmin[models.Report]):
     search_fields = ["uuid"]
     raw_id_fields = ["owner"]
     list_display = [

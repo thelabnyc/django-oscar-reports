@@ -1,8 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 from django_tables2 import Column, TemplateColumn
-from oscar.core.loading import get_class
-
-DashboardTable = get_class("dashboard.tables", "DashboardTable")
+from oscar.apps.dashboard.tables import DashboardTable
 
 
 class ReportTable(DashboardTable):
