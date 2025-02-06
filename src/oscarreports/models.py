@@ -1,22 +1,28 @@
+from __future__ import annotations
+
+import io
+import os.path
+import uuid
+
+from celery.result import AsyncResult
 from django.conf import settings
-from django.db import models
-from django.utils.translation import gettext_lazy as _
-from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import DateTimeRangeField
-from django.core.mail import EmailMultiAlternatives
 from django.contrib.sites.models import Site
+from django.core.mail import EmailMultiAlternatives
+from django.db import models
 from django.template.loader import get_template
-from celery.result import AsyncResult
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+from django_stubs_ext import StrOrPromise
+from oscar.apps.dashboard.reports.reports import ReportGenerator
 from oscar.models.fields import NullCharField
+
 from . import settings as app_settings
 from .utils import GeneratorRepository
-import uuid
-import os.path
-import io
 
 
-def get_report_upload_path(instance, filename):
+def get_report_upload_path(instance: "Report", filename: str) -> str:
     # Upload files to {MEDIA_ROOT}/{OSCAR_REPORTS_UPLOAD_PREFIX}/{YYYY}/{MM}/{DD}/{uuid}.{ext}
     extension = os.path.splitext(filename)[1].replace(".", "")
     return "{prefix}/{date}/{uuid}.{ext}".format(
@@ -64,7 +70,11 @@ class Report(models.Model):
     )
     type_code = models.CharField(_("Type Code"), max_length=50)
     description = models.TextField(_("Description"))
-    date_range = DateTimeRangeField(_("Date Range"), null=True, blank=True)
+    date_range = DateTimeRangeField(  # type:ignore[misc]
+        _("Date Range"),
+        null=True,
+        blank=True,
+    )
 
     # Celery Task ID
     task_id = models.UUIDField(
@@ -83,11 +93,11 @@ class Report(models.Model):
         _("Report File"), upload_to=get_report_upload_path, null=True, blank=True
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.uuid)
 
     @property
-    def status(self):
+    def status(self) -> str:
         if self.completed_on:
             return self.STATUS_COMPLETED
         if self.started_on:
@@ -97,29 +107,31 @@ class Report(models.Model):
         return self.STATUS_CREATED
 
     @property
-    def status_name(self):
+    def status_name(self) -> StrOrPromise:
         return self.STATUS_NAMES.get(self.status, "")
 
     @property
-    def is_complete(self):
+    def is_complete(self) -> bool:
         return self.status == self.STATUS_COMPLETED
 
     @property
-    def generator_class(self):
+    def generator_class(
+        self,
+    ) -> type[ReportGenerator]:
         generator = GeneratorRepository().get_generator(self.type_code)
         if not generator:
             raise ValueError("Can not queue report: no generator class was found.")
         return generator
 
     @property
-    def celery_task_result(self):
+    def celery_task_result(self) -> AsyncResult[None] | None:
         if not self.task_id:
-            return
-        task_id = str(self.task_id).encode()
+            return None
+        task_id = str(self.task_id)
         return AsyncResult(task_id)
 
     @property
-    def celery_task_status(self):
+    def celery_task_status(self) -> str | None:
         result_future = self.celery_task_result
         if result_future is None:
             return None
@@ -128,7 +140,11 @@ class Report(models.Model):
             return None
         return str(status).title()
 
-    def queue(self, delay=10, report_format="CSV"):
+    def queue(
+        self,
+        delay: int = 10,
+        report_format: str = "CSV",
+    ) -> AsyncResult[None]:
         # Reset metadata
         generator = self.get_generator(report_format)
         self.description = generator.report_description()
@@ -149,7 +165,8 @@ class Report(models.Model):
         from . import tasks
 
         task = tasks.generate_report.apply_async(
-            args=[self.uuid, report_format], countdown=delay
+            args=(self.uuid, report_format),
+            countdown=delay,
         )
         # Update the task metadata
         self.queued_on = timezone.now()
@@ -162,9 +179,9 @@ class Report(models.Model):
         )
         return task
 
-    queue.alters_data = True
+    queue.alters_data = True  # type:ignore[attr-defined]
 
-    def generate(self, report_format="CSV"):
+    def generate(self, report_format: str = "CSV") -> None:
         # Record start time
         self.started_on = timezone.now()
         self.save(update_fields=["started_on"])
@@ -186,10 +203,10 @@ class Report(models.Model):
         )
         self.send_completed_alert()
 
-    generate.alters_data = True
+    generate.alters_data = True  # type:ignore[attr-defined]
 
-    def send_completed_alert(self):
-        if not self.owner.email:
+    def send_completed_alert(self) -> None:
+        if self.owner is None or not self.owner.email:
             return
         ctx = {
             "site": Site.objects.get_current(),
@@ -210,9 +227,12 @@ class Report(models.Model):
         msg.attach_alternative(html, "text/html")
         msg.send()
 
-    send_completed_alert.alters_data = True
+    send_completed_alert.alters_data = True  # type:ignore[attr-defined]
 
-    def get_generator(self, report_format):
+    def get_generator(
+        self,
+        report_format: str,
+    ) -> ReportGenerator:
         kwargs = {
             "start_date": self.date_range.lower if self.date_range else None,
             "end_date": self.date_range.upper if self.date_range else None,
@@ -220,5 +240,5 @@ class Report(models.Model):
         }
         return self.generator_class(**kwargs)
 
-    def get_filename(self, report_format):
+    def get_filename(self, report_format: str) -> str:
         return "{}.{}".format(self.uuid, report_format.lower())

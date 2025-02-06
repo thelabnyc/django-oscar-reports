@@ -1,10 +1,12 @@
 from datetime import timedelta
+
+from django.contrib.auth.models import User
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse
-from django.contrib.auth.models import User
 from django.utils import timezone
 from oscar.test.testcases import WebTestCase
 from webtest.app import AppError
+
 from .. import models
 
 try:

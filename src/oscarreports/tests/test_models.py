@@ -1,11 +1,13 @@
 from datetime import timedelta
-from django.core.exceptions import ImproperlyConfigured
-from django.core import mail
-from django.test import TestCase
+from unittest import mock
+
 from django.contrib.auth.models import User
+from django.core import mail
+from django.core.exceptions import ImproperlyConfigured
+from django.test import TestCase
 from django.utils import timezone
 from freezegun import freeze_time
-from unittest import mock
+
 from .. import models
 
 try:
@@ -90,7 +92,8 @@ class ReportTest(TestCase):
 
         self.assertEqual(mock_generate_report.apply_async.call_count, 1)
         mock_generate_report.apply_async.assert_called_once_with(
-            args=["d3c74a8b-e7ae-4482-bd9c-bee69fde5c5c", "CSV"], countdown=10
+            args=("d3c74a8b-e7ae-4482-bd9c-bee69fde5c5c", "CSV"),
+            countdown=10,
         )
 
         self.assertTrue(self.report.description.startswith("Orders placed between"))

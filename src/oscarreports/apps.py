@@ -1,20 +1,22 @@
+from typing import List
+
 from django.urls import path
+from django.urls.resolvers import URLPattern
 from oscar.apps.dashboard.reports import apps
-from oscar.core.loading import get_class
 
 
 class ReportsDashboardConfig(apps.ReportsDashboardConfig):
     name = "oscarreports"
 
-    def ready(self):
+    def ready(self) -> None:
         super().ready()
-        from . import handlers  # NOQA
+        from . import handlers, views  # NOQA
 
-        self.index_view = get_class("reports_dashboard.views", "IndexView")
-        self.download_view = get_class("reports_dashboard.views", "ReportDownloadView")
-        self.delete_view = get_class("reports_dashboard.views", "ReportDeleteView")
+        self.index_view = views.IndexView
+        self.download_view = views.ReportDownloadView
+        self.delete_view = views.ReportDeleteView
 
-    def get_urls(self):
+    def get_urls(self) -> List[URLPattern]:
         urls = [
             path("", self.index_view.as_view(), name="reports-index"),
             path(
