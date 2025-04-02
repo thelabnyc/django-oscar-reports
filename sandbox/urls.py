@@ -1,9 +1,8 @@
 from django.apps import apps
 from django.conf import settings
 from django.conf.urls import i18n as i18n_urls
-from django.conf.urls import include
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from django.views.static import serve
 
 oscar = apps.get_app_config("oscar")

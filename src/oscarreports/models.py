@@ -22,7 +22,7 @@ from . import settings as app_settings
 from .utils import GeneratorRepository
 
 
-def get_report_upload_path(instance: "Report", filename: str) -> str:
+def get_report_upload_path(instance: Report, filename: str) -> str:
     # Upload files to {MEDIA_ROOT}/{OSCAR_REPORTS_UPLOAD_PREFIX}/{YYYY}/{MM}/{DD}/{uuid}.{ext}
     extension = os.path.splitext(filename)[1].replace(".", "")
     return "{prefix}/{date}/{uuid}.{ext}".format(
@@ -241,4 +241,4 @@ class Report(models.Model):
         return self.generator_class(**kwargs)
 
     def get_filename(self, report_format: str) -> str:
-        return "{}.{}".format(self.uuid, report_format.lower())
+        return f"{self.uuid}.{report_format.lower()}"
