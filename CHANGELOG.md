@@ -1,5 +1,19 @@
 # Changes
 
+## v2.4.0 (2025-04-03)
+
+### Feat
+
+- add support for Django 5.0
+
+### Fix
+
+- **deps**: update dependency django-stubs-ext to ^5.1.3
+
+### Refactor
+
+- add pyupgrade / django-upgrade precommit hooks
+
 ## v2.3.0 (2025-02-06)
 
 ### Feat
