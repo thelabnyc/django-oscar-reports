@@ -525,14 +525,14 @@ Django = ">=3.2"
 
 [[package]]
 name = "django-webtest"
-version = "1.9.12"
+version = "1.9.13"
 description = "Instant integration of Ian Bicking's WebTest (http://docs.pylonsproject.org/projects/webtest/) with Django's testing framework."
 optional = false
 python-versions = "*"
 groups = ["dev"]
 files = [
-    {file = "django_webtest-1.9.12-py3-none-any.whl", hash = "sha256:de5c988c20eef7abbb3d0508494d9e576af08087d0fb6109b1d54f15ef4d78fa"},
-    {file = "django_webtest-1.9.12.tar.gz", hash = "sha256:5012c30665e7a6e585a1544eda75045d07d5b3f5ccccd4d0fe144c4555884095"},
+    {file = "django_webtest-1.9.13-py3-none-any.whl", hash = "sha256:1903d35f429cbff54bd89d41ddc42376529d56e3c35bfe7cb83827b17fbf962d"},
+    {file = "django_webtest-1.9.13.tar.gz", hash = "sha256:97b2db843588128332326e4fc0a37bd825cf4d68f1ab0188c8cc00a9710e8279"},
 ]
 
 [package.dependencies]
@@ -1560,4 +1560,4 @@ tests = ["PasteDeploy", "WSGIProxy2", "coverage", "pyquery", "pytest", "pytest-c
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "1f6bad265c8f5be5abda159b01017c5ed779a6b44c39c211d91c43cf387e9600"
+content-hash = "9e08c92b8967863d6eac5b44d37153a9b61b4af2dcdad00569f82737759894e7"
