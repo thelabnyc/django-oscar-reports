@@ -10,6 +10,14 @@ from webtest.app import AppError
 from .. import models
 
 try:
+    # For Oscar >=4.0
+    from oscar.apps.dashboard.permissions import DashboardPermission
+
+    _permissions = DashboardPermission.get("user_record")
+except ImportError:
+    _permissions = WebTestCase.permissions
+
+try:
     try:
         from psycopg.types.range import Range as DateTimeTZRange
     except ImportError:
@@ -20,6 +28,7 @@ except ImportError:
 
 class ReportsDashboardTests(WebTestCase):
     is_staff = True
+    permissions = _permissions
 
     def test_dashboard_is_accessible_to_staff(self):
         url = reverse("dashboard:reports-index")
@@ -57,6 +66,7 @@ class ReportsDashboardTests(WebTestCase):
 
 class DownloadReportDashboardTests(WebTestCase):
     is_staff = True
+    permissions = _permissions
 
     def setUp(self):
         super().setUp()
@@ -87,6 +97,7 @@ class DownloadReportDashboardTests(WebTestCase):
 
 class DeleteReportDashboardTests(WebTestCase):
     is_staff = True
+    permissions = _permissions
 
     def setUp(self):
         super().setUp()
