@@ -1539,14 +1539,14 @@ testing = ["coverage", "pytest (>=3.1.0)", "pytest-cov", "pytest-xdist"]
 
 [[package]]
 name = "webtest"
-version = "3.0.5"
+version = "3.0.6"
 description = "Helper to test WSGI applications"
 optional = false
 python-versions = ">=3.9"
 groups = ["dev"]
 files = [
-    {file = "WebTest-3.0.5-py3-none-any.whl", hash = "sha256:63ae73a4e33f81504b0ff16c183687d6b965138a4aabecb082158437b6cab8d4"},
-    {file = "webtest-3.0.5.tar.gz", hash = "sha256:187bc8272ce4b01e43965dd19bc64500421c13ceb6c94d642d35f90a3a6888f0"},
+    {file = "webtest-3.0.6-py3-none-any.whl", hash = "sha256:0c4a5a3dcf745a78c7905b803d6a520a2cf241c1f00ccdf4351f52916d555543"},
+    {file = "webtest-3.0.6.tar.gz", hash = "sha256:4256fd5242448f56c575bcb9afe275e305a6f0723c4b01438dbdd4dd5344944b"},
 ]
 
 [package.dependencies]
@@ -1561,4 +1561,4 @@ tests = ["PasteDeploy", "WSGIProxy2", "coverage", "pyquery", "pytest", "pytest-c
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "46ca67d3c82e5126142fb7ca5ea38d9c111593344ec9e5495d9cddc59e6706a9"
+content-hash = "11a605579373c8add964429f7172d54fccc29af730ac097344257dc762b4c709"
