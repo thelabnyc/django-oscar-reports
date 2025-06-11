@@ -18,7 +18,7 @@ class ReportTable(DashboardTable):
         accessor="status_name", orderable=False, verbose_name=_("Report Status")
     )
     task_status = Column(
-        accessor="celery_task_status", orderable=False, verbose_name=_("Task Status")
+        accessor="task_status", orderable=False, verbose_name=_("Task Status")
     )
     filesize = TemplateColumn(
         template_name="oscar/dashboard/reports/report_row_filesize.html",

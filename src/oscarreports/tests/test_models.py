@@ -21,7 +21,7 @@ except ImportError:
 
 @freeze_time("2019-10-03T12:00:00-04:00")
 class ReportTest(TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.staff_user = User.objects.create_user(
             username="root", email="root@example.com", is_staff=True
         )
@@ -36,10 +36,10 @@ class ReportTest(TestCase):
         )
         self.report.save()
 
-    def test_str(self):
+    def test_str(self) -> None:
         self.assertEqual(str(self.report), "d3c74a8b-e7ae-4482-bd9c-bee69fde5c5c")
 
-    def test_status(self):
+    def test_status(self) -> None:
         self.report.queued_on = None
         self.report.started_on = None
         self.report.completed_on = None
@@ -66,21 +66,21 @@ class ReportTest(TestCase):
         self.assertEqual(self.report.status_name, "Completed")
         self.assertTrue(self.report.is_complete)
 
-    def test_generator_class(self):
+    def test_generator_class(self) -> None:
         self.assertEqual(self.report.generator_class.description, "Orders placed")
 
-    def test_generator_class_missing(self):
+    def test_generator_class_missing(self) -> None:
         self.report.type_code = "foo_bar_baz"
         with self.assertRaises(ValueError):
             print(self.report.generator_class)
 
     @mock.patch("oscarreports.tasks.generate_report")
-    def test_queue(self, mock_generate_report):
+    def test_queue(self, mock_generate_report: mock.MagicMock) -> None:
         task = mock.MagicMock()
         task.id = "f3a0b0a0-148a-4ba1-9ed4-dd5543e77d73"
-        mock_generate_report.apply_async.return_value = task
+        mock_generate_report.enqueue.return_value = task
 
-        self.assertEqual(mock_generate_report.apply_async.call_count, 0)
+        self.assertEqual(mock_generate_report.enqueue.call_count, 0)
 
         self.assertEqual(self.report.description, "")
         self.assertIsNone(self.report.queued_on)
@@ -90,10 +90,10 @@ class ReportTest(TestCase):
 
         self.report.queue()
 
-        self.assertEqual(mock_generate_report.apply_async.call_count, 1)
-        mock_generate_report.apply_async.assert_called_once_with(
-            args=("d3c74a8b-e7ae-4482-bd9c-bee69fde5c5c", "CSV"),
-            countdown=10,
+        self.assertEqual(mock_generate_report.enqueue.call_count, 1)
+        mock_generate_report.enqueue.assert_called_once_with(
+            "d3c74a8b-e7ae-4482-bd9c-bee69fde5c5c",
+            "CSV",
         )
 
         self.assertTrue(self.report.description.startswith("Orders placed between"))
@@ -102,7 +102,7 @@ class ReportTest(TestCase):
         self.assertIsNone(self.report.completed_on)
         self.assertEqual(self.report.task_id, "f3a0b0a0-148a-4ba1-9ed4-dd5543e77d73")
 
-    def test_generate(self):
+    def test_generate(self) -> None:
         self.assertIsNone(self.report.started_on)
         self.assertIsNone(self.report.mime_type)
         self.assertIsNone(self.report.report_file.name)
@@ -120,7 +120,7 @@ class ReportTest(TestCase):
         self.assertTrue(self.report.report_file.name.endswith(".csv"))
         self.assertIsNotNone(self.report.completed_on)
 
-    def test_queue_integration(self):
+    def test_queue_integration(self) -> None:
         self.assertEqual(self.report.description, "")
         self.assertIsNone(self.report.queued_on)
         self.assertIsNone(self.report.started_on)
@@ -130,8 +130,7 @@ class ReportTest(TestCase):
         self.assertIsNone(self.report.report_file.name)
         self.assertEqual(len(mail.outbox), 0)
 
-        task = self.report.queue(delay=0)
-        self.assertIsNone(task.get())
+        task = self.report.queue()
 
         self.report.refresh_from_db()
 
@@ -154,7 +153,7 @@ class ReportTest(TestCase):
             "Your report is ready to download | Orders placed between Oct. 2, 2019 and Oct. 3, 2019",
         )
 
-    def test_delete(self):
+    def test_delete(self) -> None:
         self.report.generate()
         self.report.report_file.delete = mock.MagicMock()
 

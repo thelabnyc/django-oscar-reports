@@ -4,7 +4,6 @@ import io
 import os.path
 import uuid
 
-from celery.result import AsyncResult
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import DateTimeRangeField
@@ -18,15 +17,16 @@ from django_stubs_ext import StrOrPromise
 from oscar.apps.dashboard.reports.reports import ReportGenerator
 from oscar.models.fields import NullCharField
 
-from . import settings as app_settings
+from . import tasks
 from .utils import GeneratorRepository
 
 
 def get_report_upload_path(instance: Report, filename: str) -> str:
     # Upload files to {MEDIA_ROOT}/{OSCAR_REPORTS_UPLOAD_PREFIX}/{YYYY}/{MM}/{DD}/{uuid}.{ext}
+    prefix = getattr(settings, "OSCAR_REPORTS_UPLOAD_PREFIX", "oscar-reports")
     extension = os.path.splitext(filename)[1].replace(".", "")
     return "{prefix}/{date}/{uuid}.{ext}".format(
-        prefix=app_settings.OSCAR_REPORTS_UPLOAD_PREFIX,
+        prefix=prefix,
         date=instance.created_on.strftime("%Y/%m/%d"),
         uuid=instance.uuid,
         ext=extension,
@@ -76,9 +76,14 @@ class Report(models.Model):
         blank=True,
     )
 
-    # Celery Task ID
-    task_id = models.UUIDField(
-        _("Background Task ID"), editable=False, unique=True, null=True, blank=True
+    # Background Task ID (UUID for Celery, opaque string for django-tasks)
+    task_id = models.CharField(
+        _("Background Task ID"),
+        editable=False,
+        unique=True,
+        null=True,
+        blank=True,
+        max_length=64,
     )
 
     # Status Timestamps
@@ -124,27 +129,22 @@ class Report(models.Model):
         return generator
 
     @property
-    def celery_task_result(self) -> AsyncResult[None] | None:
+    def task_result(self) -> tasks.TaskFuture[None] | None:
         if not self.task_id:
             return None
-        task_id = str(self.task_id)
-        return AsyncResult(task_id)
+        return tasks.generate_report.get_result(self.task_id)
 
     @property
-    def celery_task_status(self) -> str | None:
-        result_future = self.celery_task_result
+    def task_status(self) -> str | None:
+        result_future = self.task_result
         if result_future is None:
             return None
-        status = result_future.status
-        if status is None or status == "PENDING":
-            return None
-        return str(status).title()
+        return result_future.status_label
 
     def queue(
         self,
-        delay: int = 10,
         report_format: str = "CSV",
-    ) -> AsyncResult[None]:
+    ) -> tasks.TaskFuture[None]:
         # Reset metadata
         generator = self.get_generator(report_format)
         self.description = generator.report_description()
@@ -161,13 +161,8 @@ class Report(models.Model):
                 "task_id",
             ]
         )
-        # Queue the task using celery
-        from . import tasks
-
-        task = tasks.generate_report.apply_async(
-            args=(self.uuid, report_format),
-            countdown=delay,
-        )
+        # Schedule the report generation job
+        task = tasks.generate_report.enqueue(str(self.uuid), report_format)
         # Update the task metadata
         self.queued_on = timezone.now()
         self.task_id = task.id

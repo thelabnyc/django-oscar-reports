@@ -85,6 +85,13 @@ INSTALLED_APPS = [
     "django_tables2",
 ]
 
+try:
+    import django_tasks  # NOQA
+
+    INSTALLED_APPS.append("django_tasks")
+except ImportError:
+    pass
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -214,3 +221,10 @@ EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
 # Celery Config
 CELERY_TASK_ALWAYS_EAGER = True
+
+# Django Tasks Config
+TASKS = {
+    "default": {
+        "BACKEND": "django_tasks.backends.immediate.ImmediateBackend",
+    },
+}
