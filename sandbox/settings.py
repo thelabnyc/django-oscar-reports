@@ -18,7 +18,6 @@ ALLOWED_HOSTS = ["*"]
 USE_TZ = True
 TIME_ZONE = "America/New_York"
 USE_I18N = True
-USE_L10N = True
 LANGUAGE_CODE = "en-us"
 LANGUAGES = (
     ("en-us", _("English")),
