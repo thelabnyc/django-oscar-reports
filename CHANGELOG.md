@@ -1,5 +1,21 @@
 # Changes
 
+## v2.5.0 (2025-06-12)
+
+### Feat
+
+- support both celery (default) and django-tasks as task queue backends (#29528)
+- test against django 5.2
+
+### Fix
+
+- update docker image tag format
+- **deps**: update dependency django-oscar to >=4.0,<4.1
+- update tests for Oscar 4.0
+- **deps**: update dependency celery to >=5.5.1
+- **deps**: update dependency django-oscar to >=3.2.6,<4.1
+- **deps**: update dependency celery to >=5.5.0
+
 ## v2.4.0 (2025-04-03)
 
 ### Feat
