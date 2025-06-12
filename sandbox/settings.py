@@ -18,7 +18,6 @@ ALLOWED_HOSTS = ["*"]
 USE_TZ = True
 TIME_ZONE = "America/New_York"
 USE_I18N = True
-USE_L10N = True
 LANGUAGE_CODE = "en-us"
 LANGUAGES = (
     ("en-us", _("English")),
@@ -84,6 +83,13 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "django_tables2",
 ]
+
+try:
+    import django_tasks  # NOQA
+
+    INSTALLED_APPS.append("django_tasks")
+except ImportError:
+    pass
 
 LOGGING = {
     "version": 1,
@@ -214,3 +220,10 @@ EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
 # Celery Config
 CELERY_TASK_ALWAYS_EAGER = True
+
+# Django Tasks Config
+TASKS = {
+    "default": {
+        "BACKEND": "django_tasks.backends.immediate.ImmediateBackend",
+    },
+}

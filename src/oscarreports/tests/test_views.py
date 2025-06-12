@@ -30,12 +30,12 @@ class ReportsDashboardTests(WebTestCase):
     is_staff = True
     permissions = _permissions
 
-    def test_dashboard_is_accessible_to_staff(self):
+    def test_dashboard_is_accessible_to_staff(self) -> None:
         url = reverse("dashboard:reports-index")
         response = self.get(url)
         self.assertIsOk(response)
 
-    def test_conditional_offers_no_date_range(self):
+    def test_conditional_offers_no_date_range(self) -> None:
         url = reverse("dashboard:reports-index")
         response = self.get(url)
 
@@ -43,7 +43,7 @@ class ReportsDashboardTests(WebTestCase):
         response.form.submit()
         self.assertIsOk(response)
 
-    def test_conditional_offers_with_date_range(self):
+    def test_conditional_offers_with_date_range(self) -> None:
         url = reverse("dashboard:reports-index")
         response = self.get(url)
 
@@ -53,7 +53,7 @@ class ReportsDashboardTests(WebTestCase):
         response.form.submit()
         self.assertIsOk(response)
 
-    def test_conditional_offers_with_invalid_date_range(self):
+    def test_conditional_offers_with_invalid_date_range(self) -> None:
         url = reverse("dashboard:reports-index")
         response = self.get(url)
 
@@ -68,7 +68,7 @@ class DownloadReportDashboardTests(WebTestCase):
     is_staff = True
     permissions = _permissions
 
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
         self.staff_user = User.objects.create_user(
             username="root", email="root@example.com", is_staff=True
@@ -83,12 +83,12 @@ class DownloadReportDashboardTests(WebTestCase):
         )
         self.report.save()
 
-    def test_download_not_found(self):
+    def test_download_not_found(self) -> None:
         url = reverse("dashboard:reports-download", args=[self.report.uuid])
         with self.assertRaises(AppError):
             self.get(url)
 
-    def test_download_report(self):
+    def test_download_report(self) -> None:
         self.report.generate()
         url = reverse("dashboard:reports-download", args=[self.report.uuid])
         response = self.get(url)
@@ -99,7 +99,7 @@ class DeleteReportDashboardTests(WebTestCase):
     is_staff = True
     permissions = _permissions
 
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
         self.staff_user = User.objects.create_user(
             username="root", email="root@example.com", is_staff=True
@@ -114,12 +114,12 @@ class DeleteReportDashboardTests(WebTestCase):
         )
         self.report.save()
 
-    def test_dashboard_is_accessible_to_staff(self):
+    def test_dashboard_is_accessible_to_staff(self) -> None:
         url = reverse("dashboard:reports-delete", args=[self.report.uuid])
         response = self.get(url)
         self.assertIsOk(response)
 
-    def test_can_delete_report(self):
+    def test_can_delete_report(self) -> None:
         self.assertEqual(models.Report.objects.count(), 1)
         url = reverse("dashboard:reports-delete", args=[self.report.uuid])
         response = self.get(url)

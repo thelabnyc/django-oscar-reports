@@ -19,7 +19,7 @@ except ImportError:
 
 @freeze_time("2019-10-03T12:00:00-04:00")
 class ReportTest(TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.staff_user = User.objects.create_user(username="root", is_staff=True)
 
         self.report = models.Report()
@@ -32,13 +32,13 @@ class ReportTest(TestCase):
         )
         self.report.save()
 
-    def test_generate_report(self):
+    def test_generate_report(self) -> None:
         self.assertIsNone(self.report.started_on)
         self.assertIsNone(self.report.mime_type)
         self.assertIsNone(self.report.report_file.name)
         self.assertIsNone(self.report.completed_on)
 
-        tasks.generate_report.apply_async(args=[self.report.uuid, "CSV"])
+        tasks.generate_report.enqueue(str(self.report.uuid), "CSV")
 
         self.report.refresh_from_db()
 

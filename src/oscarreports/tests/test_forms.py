@@ -4,11 +4,11 @@ from .. import forms
 
 
 class ReportFormTest(TestCase):
-    def test_date_range_empty(self):
+    def test_date_range_empty(self) -> None:
         form = forms.ReportForm(data={})
         self.assertFalse(form.is_valid())
 
-    def test_date_range_complete(self):
+    def test_date_range_complete(self) -> None:
         form = forms.ReportForm(
             data={
                 "date_from": "2016-11-02",
@@ -18,7 +18,7 @@ class ReportFormTest(TestCase):
         )
         self.assertTrue(form.is_valid())
 
-    def test_date_range_incomplete(self):
+    def test_date_range_incomplete(self) -> None:
         form = forms.ReportForm(
             data={
                 "report_type": "order_report",
@@ -44,7 +44,7 @@ class ReportFormTest(TestCase):
         )
         self.assertTrue(form.is_valid())
 
-    def test_date_range_incorrect(self):
+    def test_date_range_incorrect(self) -> None:
         form = forms.ReportForm(
             data={
                 "date_from": "2016-11-03",
