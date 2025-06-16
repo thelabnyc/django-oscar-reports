@@ -29,7 +29,7 @@ celery = ["celery"]
 django-tasks = ["django-tasks"]
 
 [tool.poetry.group.dev.dependencies]
-coverage = "7.9.0"
+coverage = "7.9.1"
 flake8 = "7.2.0"
 freezegun = "1.5.2"
 psycopg2-binary = "2.9.10"
