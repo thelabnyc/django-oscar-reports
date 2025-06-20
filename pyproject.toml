@@ -40,7 +40,7 @@ unittest-xml-reporting = "3.2.0"
 django-webtest = "1.9.13"
 WebTest = "3.0.6"
 mypy = "1.16.1"
-django-stubs = "5.2.0"
+django-stubs = "5.2.1"
 types-psycopg2 = "^2.9.21.20250121"
 celery-types = "0.23.0"
 
