@@ -48,8 +48,6 @@ class CeleryTaskFuture[T](TaskFuture[T]):
     @property
     def status_label(self) -> str | None:
         status = self._res.status
-        if status is None or status == "PENDING":
-            return None
         return str(status).title()
 
 
@@ -65,11 +63,7 @@ class DjTasksTaskFuture[T](TaskFuture[T]):
 
     @property
     def status_label(self) -> str | None:
-        from django_tasks.task import ResultStatus
-
         status = self._res.status
-        if status == ResultStatus.NEW:
-            return None
         # If enum, use name; else cast to string
         return getattr(status, "name", str(status)).title()
 
