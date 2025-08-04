@@ -35,7 +35,7 @@ dev = [
     "psycopg2-binary (==2.9.10)",
     "PyYAML (==6.0.2)",
     "sorl-thumbnail (==12.11.0)",
-    "tox (==4.28.3)",
+    "tox (==4.28.4)",
     "unittest-xml-reporting (==3.2.0)",
     "django-webtest (==1.9.13)",
     "WebTest (==3.0.6)",
