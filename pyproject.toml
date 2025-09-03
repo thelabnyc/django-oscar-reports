@@ -43,7 +43,7 @@ dev = [
     "django-stubs (==5.2.2)",
     "types-psycopg2 (>=2.9.21.20250121,<3)",
     "celery-types (==0.23.0)",
-    "tox-uv>=1.26.1",
+    "tox-uv>=1.28.0",
 ]
 
 [tool.hatch.build.targets.wheel]
