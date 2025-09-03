@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "django-oscar-reports"
-version = "2.5.0"
+version = "2.5.1"
 description = "An extension on-top of django-oscar that improves the Oscar Dashboard's report generation system"
 readme = "README.rst"
 license = { text = "ISC" }

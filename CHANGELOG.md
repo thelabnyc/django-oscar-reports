@@ -1,5 +1,12 @@
 # Changes
 
+## v2.5.1 (2025-09-03)
+
+### Refactor
+
+- migrate black/flake8 -> ruff
+- migrate from poetry -> uv
+
 ## v2.5.0 (2025-06-12)
 
 ### Feat
