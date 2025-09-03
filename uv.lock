@@ -298,7 +298,7 @@ wheels = [
 
 [[package]]
 name = "django-oscar-reports"
-version = "2.5.0"
+version = "2.5.1"
 source = { editable = "." }
 dependencies = [
     { name = "django" },
@@ -353,7 +353,7 @@ dev = [
     { name = "mypy", specifier = "==1.17.1" },
     { name = "psycopg2-binary", specifier = "==2.9.10" },
     { name = "pyyaml", specifier = "==6.0.2" },
-    { name = "ruff", specifier = ">=0.11.6" },
+    { name = "ruff", specifier = ">=0.12.11" },
     { name = "sorl-thumbnail", specifier = "==12.11.0" },
     { name = "tox", specifier = "==4.29.0" },
     { name = "tox-uv", specifier = ">=1.26.1" },
