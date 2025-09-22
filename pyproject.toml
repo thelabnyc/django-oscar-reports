@@ -39,7 +39,7 @@ dev = [
     "unittest-xml-reporting (==3.2.0)",
     "django-webtest (==1.9.13)",
     "WebTest (==3.0.6)",
-    "mypy (==1.18.1)",
+    "mypy (==1.18.2)",
     "django-stubs (==5.2.5)",
     "types-psycopg2 (>=2.9.21.20250915,<3)",
     "celery-types (==0.23.0)",
