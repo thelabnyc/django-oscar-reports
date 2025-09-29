@@ -33,7 +33,7 @@ dev = [
     "ruff (>=0.13.2)",
     "freezegun (==1.5.5)",
     "psycopg2-binary (==2.9.10)",
-    "PyYAML (==6.0.2)",
+    "PyYAML (==6.0.3)",
     "sorl-thumbnail (==12.11.0)",
     "tox (==4.30.2)",
     "unittest-xml-reporting (==3.2.0)",
