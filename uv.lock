@@ -369,7 +369,7 @@ dev = [
     { name = "tox-uv", specifier = ">=1.28.0" },
     { name = "types-psycopg2", specifier = ">=2.9.21.20250915,<3" },
     { name = "unittest-xml-reporting", specifier = "==3.2.0" },
-    { name = "webtest", specifier = "==3.0.6" },
+    { name = "webtest", specifier = "==3.0.7" },
 ]
 
 [[package]]
@@ -1126,14 +1126,14 @@ wheels = [
 
 [[package]]
 name = "webtest"
-version = "3.0.6"
+version = "3.0.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "waitress" },
     { name = "webob" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d4/3d/1bead94691f496ea85de7cf0d317e20318fa8813010a346cc1034f6d8fbd/webtest-3.0.6.tar.gz", hash = "sha256:4256fd5242448f56c575bcb9afe275e305a6f0723c4b01438dbdd4dd5344944b", size = 80151, upload-time = "2025-06-04T19:59:01.084Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/20/85/73877efb10ba4ef02364d5671724b1326d482dc928eace5fe114215443b7/webtest-3.0.7.tar.gz", hash = "sha256:7aeab50f970d46c068e7a36dd162cb242591edf72a1d04efd21374772b931741", size = 80260, upload-time = "2025-10-06T20:38:59.293Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b8/72/22f292e65be0d68f19bb5cc439119453ba60ea1e7fec2a38217fa3d0de28/webtest-3.0.6-py3-none-any.whl", hash = "sha256:0c4a5a3dcf745a78c7905b803d6a520a2cf241c1f00ccdf4351f52916d555543", size = 32368, upload-time = "2025-06-04T19:58:59.232Z" },
+    { url = "https://files.pythonhosted.org/packages/73/74/cb337bb1758254589b6fdc0aeeb91fa987ac1e6877a79b75edbd214fc0a9/webtest-3.0.7-py3-none-any.whl", hash = "sha256:2f51a0844f3a8beaef89bc23d225fe05ad816f7e429ffcc655a13013a799ac6c", size = 32393, upload-time = "2025-10-06T20:38:57.728Z" },
 ]
