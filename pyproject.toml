@@ -40,7 +40,7 @@ dev = [
     "django-webtest (==1.9.13)",
     "WebTest (==3.0.6)",
     "mypy (==1.18.2)",
-    "django-stubs (==5.2.6)",
+    "django-stubs (==5.2.7)",
     "types-psycopg2 (>=2.9.21.20250915,<3)",
     "celery-types (==0.23.0)",
     "tox-uv>=1.28.0",
