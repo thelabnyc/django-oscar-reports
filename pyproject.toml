@@ -41,7 +41,7 @@ dev = [
     "WebTest (==3.0.7)",
     "mypy (==1.18.2)",
     "django-stubs (==5.2.7)",
-    "types-psycopg2 (>=2.9.21.20250915,<3)",
+    "types-psycopg2 (>=2.9.21.20251012,<3)",
     "celery-types (==0.23.0)",
     "tox-uv>=1.28.0",
 ]
