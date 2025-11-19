@@ -30,7 +30,7 @@
     <div class="table-header">
         <h2>{% trans "Delete report" %}</h2>
     </div>
-    <form method="post" class="card card-body">
+    <form id="delete_report_form" method="post" class="card card-body">
         {% csrf_token %}
         {{ form }}
         <dl>
