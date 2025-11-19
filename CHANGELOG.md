@@ -1,5 +1,21 @@
 # Changes
 
+## v2.5.2 (2025-11-19)
+
+### Fix
+
+- **deps**: update dependency django-oscar to >=4.1,<4.2
+- **deps**: update dependency django-tasks to >=0.9.0,<0.9.1
+- **deps**: update dependency django-tasks to >=0.9.0,<0.9.1
+- **deps**: update dependency django-stubs-ext to >=5.2.7
+- **deps**: update dependency django-stubs-ext to >=5.2.6
+- **deps**: update dependency django-stubs-ext to >=5.2.5
+- **deps**: update dependency django-stubs-ext to >=5.2.4
+- **deps**: update dependency django-tasks to >=0.8.1
+- **deps**: update dependency django-stubs-ext to >=5.2.2
+- **deps**: update dependency celery to >=5.5.3
+- prevent renovate from pointing all URLs at gitlab
+
 ## v2.5.1 (2025-09-03)
 
 ### Refactor
