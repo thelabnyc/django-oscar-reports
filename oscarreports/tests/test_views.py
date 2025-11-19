@@ -39,28 +39,31 @@ class ReportsDashboardTests(WebTestCase):
         url = reverse("dashboard:reports-index")
         response = self.get(url)
 
-        response.form["report_type"] = "conditional-offers"
-        response.form.submit()
+        form = response.forms["generate_report_form"]
+        form["report_type"] = "conditional-offers"
+        form.submit()
         self.assertIsOk(response)
 
     def test_conditional_offers_with_date_range(self) -> None:
         url = reverse("dashboard:reports-index")
         response = self.get(url)
 
-        response.form["report_type"] = "conditional-offers"
-        response.form["date_from"] = "2017-01-01"
-        response.form["date_to"] = "2017-12-31"
-        response.form.submit()
+        form = response.forms["generate_report_form"]
+        form["report_type"] = "conditional-offers"
+        form["date_from"] = "2017-01-01"
+        form["date_to"] = "2017-12-31"
+        form.submit()
         self.assertIsOk(response)
 
     def test_conditional_offers_with_invalid_date_range(self) -> None:
         url = reverse("dashboard:reports-index")
         response = self.get(url)
 
-        response.form["report_type"] = "conditional-offers"
-        response.form["date_from"] = "2017-12-31"
-        response.form["date_to"] = "2017-01-01"
-        response.form.submit()
+        form = response.forms["generate_report_form"]
+        form["report_type"] = "conditional-offers"
+        form["date_from"] = "2017-12-31"
+        form["date_to"] = "2017-01-01"
+        form.submit()
         self.assertIsOk(response)
 
 
@@ -123,6 +126,7 @@ class DeleteReportDashboardTests(WebTestCase):
         self.assertEqual(models.Report.objects.count(), 1)
         url = reverse("dashboard:reports-delete", args=[self.report.uuid])
         response = self.get(url)
-        response.form.submit()
+        form = response.forms["delete_report_form"]
+        form.submit()
         self.assertIsOk(response)
         self.assertEqual(models.Report.objects.count(), 0)

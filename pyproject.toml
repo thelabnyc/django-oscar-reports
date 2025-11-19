@@ -10,7 +10,7 @@ readme = "README.rst"
 license = { text = "ISC" }
 dependencies = [
     "Django (>=4.2)",
-    "django-oscar (>=4.0,<4.1)",
+    "django-oscar (>=4.0,<4.2)",
     "django-stubs-ext (>=5.2.7)",
 ]
 requires-python = ">=3.12"
