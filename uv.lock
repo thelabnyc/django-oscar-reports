@@ -348,7 +348,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "celery", marker = "extra == 'celery'", specifier = ">=5.5.3" },
+    { name = "celery", marker = "extra == 'celery'", specifier = ">=5.6.0" },
     { name = "django", specifier = ">=4.2" },
     { name = "django-oscar", specifier = ">=4.0,<4.2" },
     { name = "django-stubs-ext", specifier = ">=5.2.7" },
