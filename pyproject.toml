@@ -9,7 +9,7 @@ description = "An extension on-top of django-oscar that improves the Oscar Dashb
 readme = "README.rst"
 license = { text = "ISC" }
 dependencies = [
-    "Django (>=4.2.27)",
+    "Django (>=5.2)",
     "django-oscar (>=4.0,<4.2)",
     "django-stubs-ext (>=5.2.8)",
 ]
