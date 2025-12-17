@@ -9,7 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import DateTimeRangeField
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
-from django.db import models
+from django.db import models, transaction
 from django.template.loader import get_template
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -144,7 +144,7 @@ class Report(models.Model):
     def queue(
         self,
         report_format: str = "CSV",
-    ) -> tasks.TaskFuture[None]:
+    ) -> None:
         # Reset metadata
         generator = self.get_generator(report_format)
         self.description = generator.report_description()
@@ -161,18 +161,15 @@ class Report(models.Model):
                 "task_id",
             ]
         )
-        # Schedule the report generation job
-        task = tasks.generate_report.enqueue(str(self.uuid), report_format)
-        # Update the task metadata
-        self.queued_on = timezone.now()
-        self.task_id = task.id
-        self.save(
-            update_fields=[
-                "queued_on",
-                "task_id",
-            ]
-        )
-        return task
+
+        # Defer enqueue AND task_id save until after commit
+        def do_enqueue() -> None:
+            result = tasks.generate_report.enqueue(str(self.uuid), report_format)
+            self.queued_on = timezone.now()
+            self.task_id = result.id
+            self.save(update_fields=["queued_on", "task_id"])
+
+        transaction.on_commit(do_enqueue)
 
     queue.alters_data = True  # type:ignore[attr-defined]
 
