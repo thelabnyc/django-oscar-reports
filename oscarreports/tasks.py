@@ -4,7 +4,6 @@ from collections.abc import Callable
 from enum import StrEnum
 from typing import TYPE_CHECKING, Generic, assert_never
 from uuid import UUID
-import sys
 
 from django.conf import settings
 
@@ -117,17 +116,7 @@ class DjTasksTask[**P, T](Task[P, T]):
     def __init__(self, fn: Callable[P, T]) -> None:
         from django_tasks import task
 
-        self.fn = task(enqueue_on_commit=self.enqueue_on_commit)(fn)
-
-    @property
-    def enqueue_on_commit(self) -> bool:
-        """
-        Normally we don't want to send the task until after commit. But, this
-        doesn't work with tests since a commit wraps the whole test. So, send
-        immediately then.
-        """
-        is_unit_test = "test" in sys.argv
-        return not is_unit_test
+        self.fn = task()(fn)
 
     def __call__(self, *args: P.args, **kwargs: P.kwargs) -> T:
         return self.fn.call(*args, **kwargs)

@@ -88,7 +88,8 @@ class ReportTest(TestCase):
         self.assertIsNone(self.report.completed_on)
         self.assertIsNone(self.report.task_id)
 
-        self.report.queue()
+        with self.captureOnCommitCallbacks(execute=True):
+            self.report.queue()
 
         self.assertEqual(mock_generate_report.enqueue.call_count, 1)
         mock_generate_report.enqueue.assert_called_once_with(
@@ -130,7 +131,8 @@ class ReportTest(TestCase):
         self.assertIsNone(self.report.report_file.name)
         self.assertEqual(len(mail.outbox), 0)
 
-        task = self.report.queue()
+        with self.captureOnCommitCallbacks(execute=True):
+            self.report.queue()
 
         self.report.refresh_from_db()
 
@@ -138,7 +140,7 @@ class ReportTest(TestCase):
         self.assertIsNotNone(self.report.queued_on)
         self.assertIsNotNone(self.report.started_on)
         self.assertIsNotNone(self.report.completed_on)
-        self.assertEqual(str(self.report.task_id), task.id)
+        self.assertIsNotNone(self.report.task_id)
         self.assertEqual(self.report.mime_type, "text/csv")
         self.assertTrue(
             self.report.report_file.name.startswith(
