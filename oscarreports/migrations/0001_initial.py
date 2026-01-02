@@ -7,7 +7,6 @@ from django.db import migrations, models
 import django.contrib.postgres.fields.ranges
 import django.db.models.deletion
 import oscar.models.fields
-
 import oscarreports.models
 
 
