@@ -350,7 +350,7 @@ requires-dist = [
     { name = "celery", marker = "extra == 'celery'", specifier = ">=5.6.2" },
     { name = "django", specifier = ">=5.2" },
     { name = "django-oscar", specifier = ">=4.0,<4.2" },
-    { name = "django-stubs-ext", specifier = ">=5.2.8" },
+    { name = "django-stubs-ext", specifier = ">=5.2.9" },
     { name = "django-tasks", marker = "extra == 'django-tasks'", specifier = ">=0.11.0,<0.11.1" },
 ]
 provides-extras = ["celery", "django-tasks"]
