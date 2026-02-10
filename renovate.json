@@ -1,4 +1,11 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["gitlab>thelabnyc/renovate-config:library"]
+    "extends": ["gitlab>thelabnyc/renovate-config:library"],
+    "packageRules": [
+        {
+            "matchPackageNames": ["django-tasks"],
+            "enabled": false,
+            "description": "django-tasks min version pinned to 0.7.0 for wagtail compat; do not auto-bump"
+        }
+    ]
 }

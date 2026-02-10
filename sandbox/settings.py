@@ -225,5 +225,6 @@ CELERY_TASK_ALWAYS_EAGER = True
 TASKS = {
     "default": {
         "BACKEND": "django_tasks.backends.immediate.ImmediateBackend",
+        "ENQUEUE_ON_COMMIT": False,
     },
 }
