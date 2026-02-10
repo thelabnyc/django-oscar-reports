@@ -1,5 +1,24 @@
 # Changes
 
+## v2.6.0 (2026-02-10)
+
+### Feat
+
+- widen django-tasks support to >=0.7.0 for wagtail compatibility
+- support Python 3.14
+
+### Fix
+
+- **deps**: update dependency django-stubs-ext to >=5.2.9
+- **deps**: update dependency django-tasks to >=0.11.0,<0.11.1
+- **deps**: update dependency celery to >=5.6.2
+- **deps**: update dependency celery to >=5.6.1
+- **deps**: update dependency django-tasks to >=0.10.0,<0.10.1
+- **deps**: update dependency django to >=5.2
+- **deps**: update dependency django to >=4.2.27
+- **deps**: update dependency django-stubs-ext to >=5.2.8
+- **deps**: update dependency celery to >=5.6.0
+
 ## v2.5.2 (2025-11-19)
 
 ### Fix
