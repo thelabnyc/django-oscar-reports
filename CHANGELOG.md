@@ -1,5 +1,16 @@
 # Changes
 
+## v3.0.0b0 (2026-02-10)
+
+### BREAKING CHANGE
+
+- celery is no longer supported as a task backend.
+django-tasks is now a hard dependency.
+
+### Refactor
+
+- remove celery support, use django-tasks exclusively
+
 ## v2.6.0 (2026-02-10)
 
 ### Feat
