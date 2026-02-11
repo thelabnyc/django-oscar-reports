@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-django-oscar-reports is a Django app that extends django-oscar's Dashboard with an improved report generation system. It enables asynchronous report generation with support for both Celery and django-tasks backends.
+django-oscar-reports is a Django app that extends django-oscar's Dashboard with an improved report generation system. It enables asynchronous report generation using django-tasks.
 
 ## Development Commands
 
@@ -91,10 +91,8 @@ docker compose run --rm -p 8000:8000 test bash -c "./manage.py migrate && ./mana
 - Sends email alerts when reports complete
 
 **Task System** (`oscarreports/tasks.py`):
-- Abstraction layer supporting both Celery and django-tasks backends
-- Auto-detects available backend or uses `OSCAR_REPORTS_TASKS_BACKEND` setting
-- `@task` decorator wraps functions for either backend
-- `TaskFuture` interface provides unified access to task status across backends
+- Uses django-tasks `@task()` decorator for async task execution
+- `generate_report` task handles report generation in the background
 
 **Views** (`oscarreports/views.py`):
 - `IndexView`: Dashboard view displaying report list and generation form
@@ -105,22 +103,6 @@ docker compose run --rm -p 8000:8000 test bash -c "./manage.py migrate && ./mana
 - Extends Oscar's report generator registry system
 - Allows registration of custom report generators
 - Integrates with Oscar's existing `ReportGenerator` classes
-
-### Task Backend Support
-
-The package supports two async task backends:
-
-1. **Celery** (default if installed):
-   - Uses `celery.shared_task` for task definition
-   - Tasks run with `ignore_result=True` and 10s countdown
-   - Status tracked via `AsyncResult`
-
-2. **django-tasks** (alternative):
-   - Uses `@task` decorator from django-tasks
-   - Tasks enqueue on commit (except in tests)
-   - Status tracked via `TaskResult`
-
-Configure explicitly with: `OSCAR_REPORTS_TASKS_BACKEND = "celery"` or `"django-tasks"`
 
 ### Key Patterns
 
@@ -149,7 +131,6 @@ Configure explicitly with: `OSCAR_REPORTS_TASKS_BACKEND = "celery"` or `"django-
 
 **Settings**:
 - `OSCAR_REPORTS_UPLOAD_PREFIX`: Directory prefix for uploaded reports (default: "oscar-reports")
-- `OSCAR_REPORTS_TASKS_BACKEND`: "celery" or "django-tasks" (auto-detected if not set)
 - `OSCAR_FROM_EMAIL`: Email address for report completion alerts
 
 ## Integration with Oscar

@@ -84,12 +84,7 @@ INSTALLED_APPS = [
     "django_tables2",
 ]
 
-try:
-    import django_tasks  # NOQA
-
-    INSTALLED_APPS.append("django_tasks")
-except ImportError:
-    pass
+INSTALLED_APPS.append("django_tasks")
 
 LOGGING = {
     "version": 1,
@@ -217,9 +212,6 @@ OSCARAPI_BLOCK_ADMIN_API_ACCESS = False
 
 # Disable real emails
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
-
-# Celery Config
-CELERY_TASK_ALWAYS_EAGER = True
 
 # Django Tasks Config
 TASKS = {

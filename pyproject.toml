@@ -12,6 +12,7 @@ dependencies = [
     "Django (>=5.2)",
     "django-oscar (>=4.0,<4.2)",
     "django-stubs-ext (>=5.2.9)",
+    "django-tasks (>=0.7.0,<1.0)",
 ]
 requires-python = ">=3.12"
 
@@ -22,10 +23,6 @@ email = "thelabdev@thelab.co"
 [project.urls]
 Homepage = "https://gitlab.com/thelabnyc/django-oscar/django-oscar-reports"
 Repository = "https://gitlab.com/thelabnyc/django-oscar/django-oscar-reports"
-
-[project.optional-dependencies]
-celery = ["celery (>=5.6.2)"]
-django-tasks = ["django-tasks (>=0.7.0,<1.0)"]
 
 [dependency-groups]
 dev = [
@@ -42,7 +39,6 @@ dev = [
     "mypy (==1.19.1)",
     "django-stubs (==5.2.9)",
     "types-psycopg2 (>=2.9.21.20251012,<3)",
-    "celery-types (==0.24.0)",
     "tox-uv>=1.29.0",
 ]
 
