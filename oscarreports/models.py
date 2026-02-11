@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 import io
 import os.path
 import uuid
@@ -18,6 +19,10 @@ from oscar.apps.dashboard.reports.reports import ReportGenerator
 from oscar.models.fields import NullCharField
 
 from . import tasks
+
+if TYPE_CHECKING:
+    from django_tasks import TaskResult
+
 from .utils import GeneratorRepository
 
 
@@ -76,7 +81,7 @@ class Report(models.Model):
         blank=True,
     )
 
-    # Background Task ID (UUID for Celery, opaque string for django-tasks)
+    # Background Task ID
     task_id = models.CharField(
         _("Background Task ID"),
         editable=False,
@@ -129,17 +134,17 @@ class Report(models.Model):
         return generator
 
     @property
-    def task_result(self) -> tasks.TaskFuture[None] | None:
+    def task_result(self) -> TaskResult[None] | None:
         if not self.task_id:
             return None
         return tasks.generate_report.get_result(self.task_id)
 
     @property
     def task_status(self) -> str | None:
-        result_future = self.task_result
-        if result_future is None:
+        result = self.task_result
+        if result is None:
             return None
-        return result_future.status_label
+        return result.status.name.replace("_", " ").title()
 
     def queue(
         self,
