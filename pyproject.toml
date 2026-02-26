@@ -38,7 +38,7 @@ dev = [
     "WebTest (==3.0.7)",
     "mypy (==1.19.1)",
     "django-stubs (==5.2.9)",
-    "types-psycopg2 (>=2.9.21.20251012,<3)",
+    "types-psycopg2 (>=2.9.21.20260223,<3)",
     "tox-uv>=1.29.0",
 ]
 
