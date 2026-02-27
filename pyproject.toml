@@ -32,14 +32,14 @@ dev = [
     "psycopg2-binary (==2.9.11)",
     "PyYAML (==6.0.3)",
     "sorl-thumbnail (==12.11.0)",
-    "tox (==4.44.0)",
+    "tox (==4.45.0)",
     "unittest-xml-reporting (==3.2.0)",
     "django-webtest (==1.9.14)",
     "WebTest (==3.0.7)",
     "mypy (==1.19.1)",
     "django-stubs (==5.2.9)",
     "types-psycopg2 (>=2.9.21.20260223,<3)",
-    "tox-uv>=1.29.0",
+    "tox-uv>=1.31.0",
 ]
 
 [tool.hatch.build.targets.wheel]
