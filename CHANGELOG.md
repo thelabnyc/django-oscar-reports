@@ -1,5 +1,11 @@
 # Changes
 
+## v3.0.0b2 (2026-03-20)
+
+### Fix
+
+- django-stubs-ext version
+
 ## v3.0.0b1 (2026-03-20)
 
 ### Feat
