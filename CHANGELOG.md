@@ -1,5 +1,15 @@
 # Changes
 
+## v3.0.0b1 (2026-03-20)
+
+### Feat
+
+- add django-oscar-stubs for type checking
+
+### Fix
+
+- **deps**: update dependency django-stubs-ext to >=6.0.0
+
 ## v3.0.0b0 (2026-02-10)
 
 ### BREAKING CHANGE
