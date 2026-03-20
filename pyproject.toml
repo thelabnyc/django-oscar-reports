@@ -40,6 +40,7 @@ dev = [
     "django-stubs (==5.2.9)",
     "types-psycopg2 (>=2.9.21.20260223,<3)",
     "tox-uv>=1.33.4",
+    "django-oscar-stubs (>=4.1.0b2)",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -65,7 +66,7 @@ post_bump_hooks = ["git push origin master $CZ_POST_CURRENT_TAG_VERSION"]
 
 [tool.mypy]
 python_version = "3.12"
-plugins = ["mypy_django_plugin.main"]
+plugins = ["mypy_django_plugin.main", "mypy_oscar_plugin"]
 
 # Strict mode, see mypy --help
 warn_unused_configs = true
@@ -90,12 +91,12 @@ module = "django_tables2.*"
 follow_untyped_imports = true
 
 [[tool.mypy.overrides]]
-module = "oscar.*"
-follow_untyped_imports = true
-
-[[tool.mypy.overrides]]
 module = "psycopg.*"
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "oscar.test.*"
+follow_untyped_imports = true
 
 [[tool.mypy.overrides]]
 module = "webtest.*"
