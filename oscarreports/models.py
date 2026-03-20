@@ -11,6 +11,7 @@ from django.contrib.postgres.fields import DateTimeRangeField
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
 from django.db import models, transaction
+from django.http import HttpResponse
 from django.template.loader import get_template
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -185,6 +186,10 @@ class Report(models.Model):
         # Generate report content
         generator = self.get_generator(report_format)
         report = generator.generate()
+        if not isinstance(report, HttpResponse):
+            raise TypeError(
+                f"Expected HttpResponse from generator, got {type(report).__name__}"
+            )
         # Save generated content
         filename = self.get_filename(report_format)
         content = io.BytesIO(report.content)

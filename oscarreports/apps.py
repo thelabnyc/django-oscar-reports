@@ -1,5 +1,5 @@
 from django.urls import path
-from django.urls.resolvers import URLPattern
+from django.urls.resolvers import URLPattern, URLResolver
 from oscar.apps.dashboard.reports import apps
 
 
@@ -14,8 +14,8 @@ class ReportsDashboardConfig(apps.ReportsDashboardConfig):
         self.download_view = views.ReportDownloadView
         self.delete_view = views.ReportDeleteView
 
-    def get_urls(self) -> list[URLPattern]:
-        urls = [
+    def get_urls(self) -> list[URLPattern | URLResolver]:
+        urls: list[URLPattern | URLResolver] = [
             path("", self.index_view.as_view(), name="reports-index"),
             path(
                 "<uuid:uuid>/download/",
