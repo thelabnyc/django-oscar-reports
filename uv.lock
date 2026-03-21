@@ -209,7 +209,7 @@ wheels = [
 
 [[package]]
 name = "django-oscar-reports"
-version = "3.0.0b2"
+version = "3.0.0b3"
 source = { editable = "." }
 dependencies = [
     { name = "django" },
@@ -241,7 +241,7 @@ dev = [
 requires-dist = [
     { name = "django", specifier = ">=5.2" },
     { name = "django-oscar", specifier = ">=4.0,<4.2" },
-    { name = "django-stubs-ext", specifier = ">=5.2.9" },
+    { name = "django-stubs-ext", specifier = ">=6.0.1" },
     { name = "django-tasks", specifier = ">=0.7.0,<1.0" },
 ]
 
