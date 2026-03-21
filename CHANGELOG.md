@@ -1,5 +1,11 @@
 # Changes
 
+## v3.0.0b3 (2026-03-21)
+
+### Fix
+
+- update django-oscar-stubs
+
 ## v3.0.0b2 (2026-03-20)
 
 ### Fix
