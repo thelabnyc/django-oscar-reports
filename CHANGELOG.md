@@ -1,18 +1,9 @@
-# Changes
+## v3.0.0 (2026-03-26)
 
-## v3.0.0b3 (2026-03-21)
+### BREAKING CHANGE
 
-### Fix
-
-- update django-oscar-stubs
-
-## v3.0.0b2 (2026-03-20)
-
-### Fix
-
-- django-stubs-ext version
-
-## v3.0.0b1 (2026-03-20)
+- celery is no longer supported as a task backend.
+django-tasks is now a hard dependency.
 
 ### Feat
 
@@ -20,14 +11,11 @@
 
 ### Fix
 
+- require start date to be strictly before end date in ReportForm
+- **deps**: update dependency django-stubs-ext to >=6.0.1
+- update django-oscar-stubs
+- django-stubs-ext version
 - **deps**: update dependency django-stubs-ext to >=6.0.0
-
-## v3.0.0b0 (2026-02-10)
-
-### BREAKING CHANGE
-
-- celery is no longer supported as a task backend.
-django-tasks is now a hard dependency.
 
 ### Refactor
 
