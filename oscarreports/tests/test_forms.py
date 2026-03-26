@@ -53,3 +53,13 @@ class ReportFormTest(TestCase):
             }
         )
         self.assertFalse(form.is_valid())
+
+    def test_date_range_equal(self) -> None:
+        form = forms.ReportForm(
+            data={
+                "date_from": "2016-11-02 00:00:00",
+                "date_to": "2016-11-02 00:00:00",
+                "report_type": "order_report",
+            }
+        )
+        self.assertFalse(form.is_valid())

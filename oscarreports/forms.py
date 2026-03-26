@@ -49,7 +49,7 @@ class ReportForm(forms.Form):
         date_to = self.cleaned_data.get("date_to", None)
         if (
             all([date_from, date_to])
-            and self.cleaned_data["date_from"] > self.cleaned_data["date_to"]
+            and self.cleaned_data["date_from"] >= self.cleaned_data["date_to"]
         ):
             raise forms.ValidationError(
                 _("Your start date must be before your end date")
